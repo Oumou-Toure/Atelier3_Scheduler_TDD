@@ -14,3 +14,9 @@ class EveryMinute:
     def a_executer(self, temps_actuel):
         return True  
 
+class EveryHourAtMinute:
+    def __init__(self, minute: int):
+        self.minute = minute
+
+    def a_executer(self, temps_actuel):
+        return temps_actuel.minute == self.minute
