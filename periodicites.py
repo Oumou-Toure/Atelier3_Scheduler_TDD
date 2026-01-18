@@ -55,5 +55,20 @@ class MultipleDaysAtHourMinute:
             and temps_actuel.minute == self.minute
         )
 
+class EveryXMinutes:
+    def __init__(self, interval: int):
+        self.interval = interval
+        self.last_run = None
 
+    def a_executer(self, temps_actuel):
+        if self.last_run is None:
+            
+            self.last_run = temps_actuel
+            return False  
+
+        delta = (temps_actuel - self.last_run).total_seconds() / 60
+        if delta >= self.interval:
+            self.last_run = temps_actuel
+            return True
+        return False
 
