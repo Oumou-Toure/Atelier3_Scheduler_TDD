@@ -1,3 +1,5 @@
+import calendar
+
 class EveryDayAt:
     def __init__(self, hour: int, minute: int):
         self.hour = hour
@@ -112,3 +114,8 @@ class EveryXMonthsAtHourMinute:
 
         return False
 
+
+class LastDayOfMonth:
+    def a_executer(self, temps_actuel):
+        last_day = calendar.monthrange(temps_actuel.year, temps_actuel.month)[1]
+        return temps_actuel.day == last_day
