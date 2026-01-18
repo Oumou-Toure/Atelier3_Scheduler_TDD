@@ -10,9 +10,12 @@ class Scheduler:
 
     def get_scheduled_tasks(self) -> List[str]:
         return list(self._tasks.keys())
+    
 
 class Task:
     def __init__(self, name: str, schedule, action: Callable):
         self.name = name
         self.schedule = schedule
         self.action = action
+        
+        
