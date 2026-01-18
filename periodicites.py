@@ -41,3 +41,16 @@ class EveryWeekAtDayHourMinute:
             temps_actuel.minute == self.minute
         )
 
+class MultipleDaysAtHourMinute:
+    def __init__(self, jours: list[int], hour: int, minute: int):
+        
+        self.jours = jours
+        self.hour = hour
+        self.minute = minute
+
+    def a_executer(self, temps_actuel):
+        return (
+            temps_actuel.weekday() in self.jours
+            and temps_actuel.hour == self.hour
+            and temps_actuel.minute == self.minute
+        )
