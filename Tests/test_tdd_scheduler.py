@@ -1,6 +1,6 @@
 from datetime import datetime
 from scheduler import Scheduler
-from periodicites import EveryDayAt, EveryMinute, EveryHourAtMinute, EveryDayAtMinute, EveryWeekAtDayHourMinute, MultipleDaysAtHourMinute, EveryXMinutes
+from periodicites import EveryDayAt, EveryMinute, EveryHourAtMinute, EveryDayAtMinute, EveryWeekAtDayHourMinute, MultipleDaysAtHourMinute, EveryXMinutes, EveryXHours
 from heures import FakeClock
 
 def test_ajout_taches():
@@ -191,3 +191,32 @@ def test_execution_tache_toutes_les_X_minutes():
     heure.advance_minutes(3)
     scheduler.update()
     assert executed == ["done", "done"]
+
+
+def test_execution_tache_toutes_les_X_heures():
+    
+    heure = FakeClock(datetime(2026, 1, 18, 2, 0))
+    scheduler = Scheduler(heure)
+
+    executed = []
+
+    scheduler.set_task(
+        "every_2_hours_task",
+        EveryXHours(2),
+        lambda: executed.append("done")
+    )
+
+    scheduler.update()
+    assert executed == []  
+
+    heure.advance_minutes(60) 
+    scheduler.update()
+    assert executed == []  
+
+    heure.advance_minutes(60)  
+    scheduler.update()
+    assert executed == ["done"]  
+
+    heure.advance_minutes(120)  
+    scheduler.update()
+    assert executed == ["done", "done"]  
