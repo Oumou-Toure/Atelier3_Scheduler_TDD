@@ -27,3 +27,5 @@ class EveryDayAtMinute:
 
     def a_executer(self, temps_actuel):
         return temps_actuel.minute == self.minute
+
+
