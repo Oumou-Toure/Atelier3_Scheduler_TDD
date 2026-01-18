@@ -89,4 +89,25 @@ class EveryXHours:
             return True
         return False
 
+class EveryXMonthsAtHourMinute:
+    def __init__(self, interval: int, hour: int, minute: int):
+        self.interval = interval
+        self.hour = hour
+        self.minute = minute
+        self.last_run_month = None
+        self.last_run_year = None
 
+    def a_executer(self, temps_actuel):
+        if self.last_run_month is None:
+            
+            self.last_run_month = temps_actuel.month
+            self.last_run_year = temps_actuel.year
+            return True
+
+        delta_months = (temps_actuel.year - self.last_run_year) * 12 + (temps_actuel.month - self.last_run_month)
+        if delta_months >= self.interval and temps_actuel.hour == self.hour and temps_actuel.minute == self.minute:
+            self.last_run_month = temps_actuel.month
+            self.last_run_year = temps_actuel.year
+            return True
+
+        return False
