@@ -132,3 +132,9 @@ class LastFridayOfMonth:
         return is_friday and is_last_friday
 
 
+class OrPeriodicity:
+    def __init__(self, periodicities):
+        self.periodicities = periodicities
+
+    def a_executer(self, temps_actuel):
+        return any(p.a_executer(temps_actuel) for p in self.periodicities)
