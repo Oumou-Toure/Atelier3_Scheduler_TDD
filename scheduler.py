@@ -15,6 +15,15 @@ class Scheduler:
         if name in self._tasks:
             del self._tasks[name]
             
+    def update(self):
+        now = self._clock.now()
+
+        for task in self._tasks.values():
+            if task.schedule.a_executer(now):
+                task.action()
+
+
+
 class Task:
     def __init__(self, name: str, schedule, action: Callable):
         self.name = name
