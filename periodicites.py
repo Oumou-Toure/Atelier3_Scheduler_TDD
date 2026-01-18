@@ -121,4 +121,11 @@ class LastDayOfMonth:
         return temps_actuel.day == last_day
 
 
-
+class LastFridayOfMonth:
+    def a_executer(self, temps_actuel):
+        
+        last_day = calendar.monthrange(temps_actuel.year, temps_actuel.month)[1]
+        is_friday = temps_actuel.weekday() == 4
+        
+        is_last_friday = temps_actuel.day + 7 > last_day
+        return is_friday and is_last_friday
