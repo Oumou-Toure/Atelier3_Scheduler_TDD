@@ -73,3 +73,18 @@ class EveryXMinutes:
         return False
 
 
+class EveryXHours:
+    def __init__(self, interval: int):
+        self.interval = interval  
+        self.last_run = None
+
+    def a_executer(self, temps_actuel):
+        if self.last_run is None:
+            self.last_run = temps_actuel
+            return False  
+
+        delta_hours = (temps_actuel - self.last_run).total_seconds() / 3600
+        if delta_hours >= self.interval:
+            self.last_run = temps_actuel
+            return True
+        return False
