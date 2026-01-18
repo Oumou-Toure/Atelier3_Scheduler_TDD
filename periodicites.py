@@ -10,3 +10,6 @@ class EveryDayAt:
             and temps_actuel.minute == self.minute
         )
         
+class EveryMinute:
+    def a_executer(self, temps_actuel):
+        return True  
