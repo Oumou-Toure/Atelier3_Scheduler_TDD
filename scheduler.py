@@ -12,22 +12,16 @@ class Scheduler:
         return list(self._tasks.keys())
     
     def remove_task(self, name: str):
-        if name in self._tasks:
-            del self._tasks[name]
+        self._tasks.pop(name, None)
             
     def update(self):
         now = self._clock.now()
-
         for task in self._tasks.values():
             if task.schedule.a_executer(now):
                 task.action()
-
-
 
 class Task:
     def __init__(self, name: str, schedule, action: Callable):
         self.name = name
         self.schedule = schedule
         self.action = action
-        
-        
